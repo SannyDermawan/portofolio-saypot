@@ -791,3 +791,13 @@ main{overflow:clip}
   .chips{position:relative;left:auto;bottom:auto;transform:none;width:min(100%,400px);margin-top:22px}
   .chip{white-space:normal}
 }
+
+/* CV menu: can open upward, and is more compact so the four options fit in a short window */
+.cvmenu.up .cv-pop{top:auto;bottom:calc(100% + 8px);transform-origin:bottom left;transform:translateY(6px) scale(.98)}
+.cvmenu.up.open .cv-pop{transform:none}
+.pitch .cvmenu.up .cv-pop{transform-origin:bottom right}
+.cv-pop a{padding:9px 14px}
+.cv-pop .cv-grp{padding:6px 14px 2px}
+.cv-pop .cv-grp:not(:first-child){padding-top:10px}
+.cv-pop a span{font-size:12px}
+.cv-pop{max-height:calc(100vh - 24px);overflow:auto}

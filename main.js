@@ -126,7 +126,19 @@
       e.stopPropagation();
       const was = m.classList.contains('open');
       closeCv();
-      if (!was) { m.classList.add('open'); t.setAttribute('aria-expanded', 'true'); }
+      if (!was) {
+        // open downward when there is room, otherwise upward, so the four options are never cut off by the bottom of the window
+        m.classList.remove('up');
+        const pop = m.querySelector('.cv-pop');
+        const need = pop.scrollHeight + 16, r = m.getBoundingClientRect();
+        const below = innerHeight - r.bottom, above = r.top;
+        const goUp = below < need && above > below;
+        if (goUp) m.classList.add('up');
+        // never taller than the room it opens into (the fixed navbar takes the top 100px), the menu scrolls inside if it must
+        pop.style.maxHeight = Math.max(170, (goUp ? above - 104 : below - 16)) + 'px';
+        m.classList.add('open'); t.setAttribute('aria-expanded', 'true');
+        if (Math.max(below, above) < need) m.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }
     });
     m.querySelectorAll('.cv-pop a').forEach((a) => a.addEventListener('click', () => setTimeout(closeCv, 150)));
   });
