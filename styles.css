@@ -780,3 +780,14 @@ main{overflow:clip}
 .theme{width:44px;height:44px}
 .hero{padding-top:118px}
 @media(max-width:960px){.nav-wrap{top:16px}.nav{padding:8px 10px 8px 20px}.hero{padding-top:104px}.theme{margin-left:auto}}
+
+.cv-grp{display:block;padding:8px 14px 4px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+.cv-pop .cv-grp:not(:first-child){margin-top:4px;border-top:1px solid var(--line);padding-top:12px}
+.cv-pop{min-width:320px}
+
+/* phones and tablets: the three highlight cards sit under the portrait instead of on top of it */
+@media(max-width:960px){
+  .hero-art{display:flex;flex-direction:column;align-items:center;margin-bottom:28px}
+  .chips{position:relative;left:auto;bottom:auto;transform:none;width:min(100%,400px);margin-top:22px}
+  .chip{white-space:normal}
+}

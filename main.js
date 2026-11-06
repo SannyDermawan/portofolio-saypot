@@ -151,10 +151,10 @@
       img: ['assets/agenteco-hero.webp', 'assets/agenteco-marketplace.webp'],
       stats: [['97', 'passing Foundry tests'], ['54s', 'full on-chain deal, BSC Testnet'], ['7', 'test networks, one live app']],
       points: [
-        'Wrote the Solidity escrow, dispute and rating contracts. Every state has a deadline and an exit anyone can trigger, so funds cannot be locked forever.',
-        'Built the TypeScript backend (Express, Prisma, PostgreSQL, viem) and the Next.js app.',
-        'Put LLMs behind guardrails for negotiation and verification: the AI proposes, code and the contract decide.',
-        'Published an SDK and CLI on npm, plus an MCP server with 11 tools.'],
+        'Built entirely with Claude Code. I set the direction and the rules, ran and checked what it produced, and shipped it.',
+        'The result: Solidity escrow, dispute and rating contracts where every state has a deadline and an exit anyone can trigger, so funds cannot be locked forever.',
+        'A TypeScript backend (Express, Prisma, PostgreSQL, viem) and a Next.js app, with LLMs behind guardrails for negotiation and verification: the AI proposes, code and the contract decide.',
+        'An SDK and CLI published on npm, plus an MCP server with 11 tools.'],
       links: [['Live app', 'https://www.agenteco.web.id'], ['Source', 'https://github.com/SannyDermawan/agenteco-multichain'], ['Verified contract', 'https://testnet.bscscan.com/address/0xdC08Dd97e959Ab6ED2AB76702F25757Fe1fF46BE#code'], ['npm', 'https://www.npmjs.com/package/@agenteco/sdk'], ['Demo', 'https://youtu.be/arWL6aU59ic']],
       note: 'Test networks only. Contracts not audited. No real users yet. Built with AI coding tools.'
     },
