@@ -145,6 +145,49 @@
   addEventListener('click', closeCv);
   addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCv(); });
 
+
+  // every click is a sword cut: a bright slash flashes through the point, and a small disc there is cut in two and the halves fly apart
+  if (!reduce) {
+    const layer = document.createElement('div');
+    layer.setAttribute('aria-hidden', 'true');
+    layer.style.cssText = 'position:fixed;inset:0;z-index:2147483000;pointer-events:none;overflow:hidden';
+    document.body.appendChild(layer);
+    const ANG = 32; // degrees, the cut runs from upper left to lower right
+    const slashAt = (x, y) => {
+      const mk = (css) => { const d = document.createElement('div'); d.style.cssText = 'position:absolute;pointer-events:none;' + css; layer.appendChild(d); return d; };
+      const done = (els, ms) => setTimeout(() => els.forEach((e) => e.remove()), ms);
+      // the slash itself
+      const len = 190;
+      const line = mk('left:' + (x - len / 2) + 'px;top:' + (y - 1.5) + 'px;width:' + len + 'px;height:3px;border-radius:3px;transform-origin:50% 50%;' +
+        'background:linear-gradient(90deg,transparent,#fff 28%,#bff3fb 55%,#4cc3d9 80%,transparent);box-shadow:0 0 10px 2px #7ee0ee,0 0 28px 6px #4cc3d977;opacity:0');
+      line.animate([
+        { transform: 'rotate(' + ANG + 'deg) scaleX(0)', opacity: 1, offset: 0 },
+        { transform: 'rotate(' + ANG + 'deg) scaleX(1)', opacity: 1, offset: 0.35 },
+        { transform: 'rotate(' + ANG + 'deg) scaleX(1)', opacity: 0, offset: 1 }
+      ], { duration: 420, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' });
+      // the disc, cut along the same line: two halves slide away from each other across the cut
+      const R = 15, half = (top) => {
+        const g = mk('left:' + (x - R) + 'px;top:' + (y - R) + 'px;width:' + (R * 2) + 'px;height:' + (R * 2) + 'px;transform:rotate(' + ANG + 'deg);transform-origin:50% 50%');
+        const h = document.createElement('div');
+        h.style.cssText = 'position:absolute;left:0;width:100%;height:50%;' + (top
+          ? 'top:0;border-radius:' + R * 2 + 'px ' + R * 2 + 'px 0 0;background:linear-gradient(180deg,#e9fdff,#4cc3d9)'
+          : 'bottom:0;border-radius:0 0 ' + R * 2 + 'px ' + R * 2 + 'px;background:linear-gradient(180deg,#4cc3d9,#0e7490)');
+        h.style.boxShadow = '0 0 14px #4cc3d999';
+        g.appendChild(h);
+        const dir = top ? -1 : 1;
+        h.animate([
+          { transform: 'translateY(0) scale(1)', opacity: 1 },
+          { transform: 'translateY(' + dir * 3 + 'px) scale(1)', opacity: 1, offset: 0.22 },
+          { transform: 'translateY(' + dir * 30 + 'px) scale(.55)', opacity: 0 }
+        ], { duration: 520, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'forwards' });
+        return g;
+      };
+      const a = half(true), b = half(false);
+      done([line, a, b], 600);
+    };
+    addEventListener('pointerdown', (e) => { if (e.button === 0 || e.pointerType === 'touch') slashAt(e.clientX, e.clientY); }, { passive: true });
+  }
+
   // active section in the nav
   const links = [...document.querySelectorAll('.nav nav a')];
   const secs = [...document.querySelectorAll('main section')];
