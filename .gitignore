@@ -1,0 +1,18 @@
+# Secrets
+.env
+.env.*
+
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Claude Code local files (in case they are ever created inside this folder)
+.claude/
